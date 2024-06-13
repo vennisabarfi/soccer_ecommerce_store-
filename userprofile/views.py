@@ -17,3 +17,6 @@ def create_user(request):
     
     else:
         return JsonResponse({'error': 'Only POST requests allowed'})
+    
+
+
