@@ -20,7 +20,7 @@ from userprofile import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('create/', views.create_user, name = 'create_user'),
+    path('api/', include('userprofile.urls')),  # Include your app's URLs
     
    
 ]
