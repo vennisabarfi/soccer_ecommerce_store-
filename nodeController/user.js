@@ -21,17 +21,6 @@ router.post('/create_user', async function(req,res){
     }
 });
 
-router.get('/view_users', async function(req,res){
-    try {
-        const response = await axios.get(`http://localhost:8000/admin/auth/user`, {
-        })
-        console.log('Request successful');
-        res.status(200).send(response.data);
-    } catch (error) {
-        console.log(`Error: ${error}`);
-        res.status(500).send(({message: `User cannot be found. More info here: ${error}`}))
-    }
-})
 
 
 
