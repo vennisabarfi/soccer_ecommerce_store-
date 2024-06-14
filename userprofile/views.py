@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -16,17 +17,17 @@ def home(request):
 def create_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
+        username = data.cleaned_data.get('username')
+        password = make_password.cleaned_data.get('password')
         email = data.get('email')
 
         #create a new user
         new_user = User.objects.create_user(username = username, password=password, email=email)
-        return JsonResponse({'message': 'User created successfully', 'user_id': new_user.id})
+        return HttpResponse({'message': 'User created successfully', 'user_id': new_user.id})
    
     
     else:
-        return JsonResponse({'error': 'Only POST requests allowed'})
+        return HttpResponse({'error': 'Only POST requests allowed'})
     
 #register a user
 def register(request):
@@ -36,7 +37,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
-            return redirect('login')
+            return redirect('login.html')
         
     else:
         form = UserRegisterForm()
