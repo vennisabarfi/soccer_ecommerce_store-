@@ -1,10 +1,11 @@
 {
   "name": "nodecontroller",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "model": "nodemon model.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,8 @@
   "description": "",
   "dependencies": {
     "axios": "^1.7.2",
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
   }
 }
