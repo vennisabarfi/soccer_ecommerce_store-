@@ -1,7 +1,8 @@
-const express = require('express');
+const express = require('express'); 
 const axios = require('axios');
 const router = express.Router();
-const localhost = 'http://127.0.0.1:8000'
+const localhost = 'http://127.0.0.1:8000';  
+
 
 router.post('/create_user', async function(req,res){
     const {username, password, email} = req.body;
