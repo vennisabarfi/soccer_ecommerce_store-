@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const user = require('./user');
-const model = require('./model');
+const model = require('./Models/model');
 
 app.use(user);
 
