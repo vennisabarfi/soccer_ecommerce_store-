@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const user = require('./user');
-const model = require('./Models/model');
+const boots_model = require('./Models/bootsmodel');
+
 
 app.use(user);
 
-app.use(model);
+app.use(boots_model);
 
 app.listen(PORT, function(req,res){
     try {
