@@ -18,6 +18,9 @@ const dbConfig = {
 
 const client = new Client(dbConfig);
 
+// Update table to convert recordid datatype to num or use serial key instead 
+
+
 // // Connect to PostgreSQL database
 // client.connect()
 //     .then(() => {
