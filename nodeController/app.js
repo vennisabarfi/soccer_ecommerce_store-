@@ -2,12 +2,16 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const user = require('./user');
-const boots_model = require('./Models/bootsmodel');
+const product = require('./Models/product');
 
+
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 app.use(user);
 
-app.use(boots_model);
+app.use(product);
 
 app.listen(PORT, function(req,res){
     try {
