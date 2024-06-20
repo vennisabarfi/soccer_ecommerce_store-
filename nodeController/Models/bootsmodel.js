@@ -6,10 +6,7 @@ require('dotenv').config()
 //  test if dotenv properly loaded
 console.log(process.env.DATABASE);
 
-const file_path = `${process.cwd()}\\Models`;
-
-
-console.log(file_path); 
+ 
  
 const dbConfig = {
     user: process.env.USER,
