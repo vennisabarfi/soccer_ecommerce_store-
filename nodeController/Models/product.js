@@ -1,17 +1,17 @@
 const express  = require('express');
 const router = express.Router();
-const client = require('./database');
+const pool = require('./database');
 
 
 
 // View all products
 router.get('/products', function(req,res){
     // Connect to the database
-client
+pool
 .connect()
 .then(() => {
     console.log('Connected to PostgreSQL database');
-    client.query('SELECT * FROM boots', (err, result) => {
+    pool.query('SELECT * FROM boots', (err, result) => {
         if (err) {
             console.error('Error executing query', err);
         } else {
@@ -20,7 +20,7 @@ client
         }
 
         // Close the connection when done
-        client
+        pool
             .end()
             .then(() => {
                 console.log('Connection to PostgreSQL closed');
@@ -40,11 +40,11 @@ router.get('/products/view/:id', function(req,res){
     const id = req.params.id;
  
      // Connect to the database
-client
+pool
 .connect()
 .then(() => {
     console.log('Connected to PostgreSQL database');
-    client.query(`SELECT * FROM boots WHERE recordid = ${id}`, (err, result) => {
+    pool.query(`SELECT * FROM boots WHERE recordid = ${id}`, (err, result) => {
         if (err) {
             console.error('Error executing query', err);
         } else {
@@ -52,7 +52,7 @@ client
             console.log('Query result:', result.rows);
         }
         // Close the connection when done
-        client
+        pool
             .end()
             .then(() => {
                 console.log('Connection to PostgreSQL closed');
@@ -62,21 +62,29 @@ client
             });
     });
 })
-.catch((err) => {
+.catch((err) => { 
     console.error('Error connecting to PostgreSQL database', err);
 });
-}) 
+})  
+
+//   {
+//     recordid: '1679742361-287',
+//     bootsname: 'X Speedportal+',
+//     bootsmaterial: 'Speedskin',
+//     bootsbrand: 'adidas',
+//     bootstype: 'Speed',
+//     bootsposition: 'Attack'
 
 
 //Filter products in database(by bootsname)
 router.get('/products/view/', function(req,res){
     const bootsname = req.query.name;
      // Connect to the database
-client
+pool
 .connect()
 .then(() => {
     console.log('Connected to PostgreSQL database');
-    client.query(`SELECT * FROM boots WHERE bootsname = ${bootsname}`, (err, result) => {
+    pool.query(`SELECT * FROM boots WHERE bootsname = ${bootsname}`, (err, result) => {
         if (err) {
             console.error('Error executing query', err);
         } else {
@@ -84,7 +92,7 @@ client
             console.log('Query result:', result.rows);
         }
         // Close the connection when done
-        client 
+        pool 
             .end() 
             .then(() => {
                 console.log('Connection to PostgreSQL closed');
@@ -106,22 +114,22 @@ client
 router.get('/products/view/', async function(req,res){
     const bootsposition = req.query.position;
      // Connect to the database
-client
-.connect()
-.then(() => {
+pool 
+.connect() 
+.then(() => { 
     console.log('Connected to PostgreSQL database');
      // Using parameterized query to prevent SQL injection
     const query = 'SELECT * FROM boots WHERE bootsposition = $1'; 
     const values = [bootsposition]
-    client.query((query, values), (err, result) => {
+    pool.query((query, values), (err, result) => {
         if (err) {
             console.error('Error executing query', err);
-        } else {
+        } else { 
             res.send(result.rows);
             console.log('Query result:', result.rows);
         }
         // Close the connection when done
-        client
+        pool
             .end()
             .then(() => {
                 console.log('Connection to PostgreSQL closed');
@@ -136,19 +144,16 @@ client
 });
 })
 
-
-
-
 //Filter products in database(by bootstype)
 router.get('/products/view/', function(req,res){
-    const bootstype = req.query.type;
+    const bootstype = req.query.bootType;
     //const {name, color} = req.query
      // Connect to the database
-client
-.connect() 
+pool
+.connect()  
 .then(() => {
     console.log('Connected to PostgreSQL database');
-    client.query(`SELECT * FROM boots WHERE bootstype = ${bootstype}`, (err, result) => {
+    pool.query(`SELECT * FROM boots WHERE bootstype = '${bootstype}'`, (err, result) => {
         if (err) {
             console.error('Error executing query', err);
         } else {
@@ -156,7 +161,7 @@ client
             console.log('Query result:', result.rows);
         }
         // Close the connection when done
-        client
+        pool
             .end()
             .then(() => {
                 console.log('Connection to PostgreSQL closed');
