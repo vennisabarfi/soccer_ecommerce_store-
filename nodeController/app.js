@@ -2,18 +2,16 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const user = require('./user');
-const product = require('./Models/product');
+const products = require('./hello-prisma/products');
 
 
-const file_path = `${process.cwd()}`;
-console.log(file_path);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 app.use(user);
 
-app.use(product);
+app.use(products);
 
 app.listen(PORT, function(req,res){
     try {
