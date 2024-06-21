@@ -1,9 +1,9 @@
 
 // Update table to convert recordid datatype to num or use serial key instead 
-
+const pool = require('./database');
 
 // Connect to PostgreSQL database
-client.connect()
+pool.connect()
     .then(() => {
         console.log('Connected to PostgreSQL database');
     })
@@ -24,13 +24,13 @@ BootsPosition VARCHAR(255)
  
 `;
 // Save to postgres
-client.query(createTable, function(err,result){
+pool.query(createTable, function(err,result){
     if(err){
         console.error(`Error creating table: ${err}`);
     } else{
         console.log('Table created successfully');
     }
 
-    client.end();
+    pool.end();
 });
 

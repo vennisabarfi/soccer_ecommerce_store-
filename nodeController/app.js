@@ -5,6 +5,8 @@ const user = require('./user');
 const product = require('./Models/product');
 
 
+const file_path = `${process.cwd()}`;
+console.log(file_path);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
